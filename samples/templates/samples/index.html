@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block head_title %}Samples || {{ block.super }}{% endblock head_title %}
+
+{% block header%}About{% endblock header %}
+
+{% block content%}
+
+{% include "_modal.html" %}
+
+<div class="jumbotron">
+	<h1 class="display-4">Samples</h1>
+	<hr class="my-4">
+	<p class="lead">
+		More ...
+	</p>
+</div>
+
+{% endblock content %}

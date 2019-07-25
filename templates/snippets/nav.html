@@ -1,0 +1,93 @@
+{% url 'cart:home' as cart_url %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">TUEINVCMS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      {% if user.is_authenticated %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Assets
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/assetsprojects">Projects</a>
+          <a class="dropdown-item" href="/assetsoverview">Overview</a>
+          <a class="dropdown-item" href="/assetsadd">Add</a>
+          <!-- <a class="dropdown-item" href="/assetsloan">Reservations</a> -->
+          <a class="dropdown-item" href="/reservations">Reservations</a>
+          <a class="dropdown-item" href="/assetssearch">Search</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Calibration
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/calibrationreport">Report</a>
+          <a class="dropdown-item" href="/calibrationupload">Upload</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          History
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/historyassets">Assets</a>
+          <a class="dropdown-item" href="/historypeople">People</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tables">Tables</a>
+      </li>
+      {% endif %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Help
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/about">About</a>
+          <a class="dropdown-item" href="/contact">Contact</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ cart_url }}">
+          {{ request.session.cart_items }} 
+          <i class="fa fa-shopping-cart"></i> 
+        </a>
+      </li>
+    </ul>
+    <ul class="navbar-nav navbar-right">
+      {% if user.is_authenticated %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          User
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/account/profile">Profile</a>
+          <a class="dropdown-item" href="/account/profile/edit">Edit Profile</a>
+          <a class="dropdown-item" href="/account/changepassword">Change Password</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/account/logout">Logout</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/account/register">Register</a>
+      </li>
+      {% else %}
+      <li class="nav-item active">
+        <a class="nav-link" href="/account/login">Login</a>
+      </li>
+      {% endif %}
+    </ul>
+    {% include 'search/snippets/search-form.html' %}
+
+
+  </div>
+</nav>

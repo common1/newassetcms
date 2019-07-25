@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block head_title %}Asset Cart || {{ block.super }}{% endblock head_title %} 
+
+{% block content %}
+
+{% include "_modal.html" %}
+
+<div class="jumbotron">
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12 mb-3">
+                <h1 class="display-6">Asset Cart</h1>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 mb-3">
+            {% include 'inventory/assets/snippets/clear_cart.html' with cart=cart %}
+          </div>
+          <div class="col-12 mb-3">
+            {% if cart.assets.exists %}
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th class="text-center" scope="col">#</th>
+                  <th class="text-center" scope="col">Name</th>
+                  <th class="text-center" scope="col">Code</th>
+                  <th class="text-center" scope="col">Asset Type</th>
+                  <th class="text-right" scope="col">Purchase Price</th>
+                  <th class="text-center" scope="col"><span class="fa fa-shopping-basket fa-lg"></span></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for asset in cart.assets.all %}
+                <tr>
+                  <th class="text-center" scope="row">{{ forloop.counter }}</th>
+                  <td class="text-center">{{ asset.name }}</td>
+                  <td class="text-center">{{ asset.code }}</td>
+                  <td class="text-center">{{ asset.assettype }}</td>
+                  <td class="text-right">{{ asset.purchase_price }}</td>
+                  <td class="text-center">
+                    {% include 'inventory/assets/snippets/update_cart.html' with asset=asset cart=cart current='carts' %}
+                  </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                  <td class="text-right" colspan=5>Total : <b>{{ cart.total }}</b></td>
+                </tr>
+                <!-- <tr>
+                  <td class="text-right" colspan=5><a class='btn btn-success' href='{% url "carts:checkout" %}'>Checkout</a></td>
+                  <td class="text-right" colspan=5>
+                    <a class='btn btn-success' href='{% url "carts:reserve" %}'>New Reservation</a>
+                    <a class='btn btn-success' href='{% url "carts:reserve" %}'>Existing Reservation</a>
+                  </td>
+                </tr> -->
+              </tbody>
+            </table>
+            {% else %}
+            <p class='lead'>Cart is empty</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+<div>
+
+{% endblock content %}
+
+{% block extrascripts %}
+<script type="text/javascript">
+  $(function() {
+    // Read asset buttons
+    $(".read-asset").each(function() {
+      $(this).modalForm({ formURL: $(this).data("id") });
+    });
+
+    // Hide message
+    $(".alert")
+      .fadeTo(2000, 500)
+      .slideUp(500, function() {
+        $(".alert").slideUp(500);
+      });
+  });
+</script>
+{% endblock extrascripts %}

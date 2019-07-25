@@ -1,0 +1,12 @@
+{% extends "base.html" %} 
+
+{% block head_title %}Login || {{ block.super }}{% endblock head_title %} 
+
+{% block content%} 
+
+<form method="POST"> {% csrf_token %}
+    {{ form }}
+    <button type='submit' class='btn btn-default'>Submit</button>
+</form> 
+
+{% endblock content %}

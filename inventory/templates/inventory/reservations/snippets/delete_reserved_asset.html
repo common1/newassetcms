@@ -1,0 +1,11 @@
+<form method="POST" action='{% url "inventory:delete_reserved_asset" %}' class="form">
+    {% csrf_token %}
+    <input type='hidden' name='reservation_id' value='{{ reservation.id }}' />
+    <input type='hidden' name='reservedasset_id' value='{{ reservedasset.id }}' />
+
+    <button type='submit' class='btn btn-sm btn-danger'>
+        <span class="fa fa-minus"></span>
+    </button>
+    
+</form>
+

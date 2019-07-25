@@ -1,0 +1,68 @@
+{% load widget_tweaks %}
+
+{% include 'common/snippets/modal_header.html' with modal_title='SI Base Unit details' %}
+
+<div class="modal-body">
+  <table class="table table-borderless table-sm">
+    <tr>
+      <td>Name</td>
+      <td>
+        <strong>{{ sibaseunit.name }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Symbol</td>
+      <td>
+        <strong>{{ sibaseunit.symbol }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Value</td>
+      <td>
+        <strong>{{ sibaseunit.value }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Weight</td>
+      <td>
+        <strong>{{ sibaseunit.weight }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Parent</td>
+      <td>
+        <strong>{{ sibaseunit.parent }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Created by</td>
+      <td>
+        <strong>{{ sibaseunit.created_by }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Created at</td>
+      <td>
+        <strong>{{ sibaseunit.created_at }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Last modified by</td>
+      <td>
+        <strong>{{ sibaseunit.last_modified_by }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Last modified at</td>
+      <td>
+        <strong>{{ sibaseunit.last_modified_at }}</strong>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" data-dismiss="modal">
+    Close
+  </button>
+</div>

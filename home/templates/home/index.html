@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_title %}{{ title }} || {{ block.super }}{% endblock head_title %}
+
+{% block header%}{{ header }}{% endblock header %}
+
+{% block content%}
+
+<div class="jumbotron">
+	<h1 class="display-4">{{ header }}</h1>
+	<p class="lead">{{ subheader }}</p>
+	<hr class="my-4">
+	<p>{{ copyright }}</p>
+	{% if request.user.is_authenticated %}
+	<p class="lead">
+		<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+	</p>
+	<p>
+		{{ loggedin_content }}
+	</p>
+	{% endif %}
+	<p>
+		<img src="{% static 'img/vertigo.jpg' %}" class='img-fluid' />
+	</p>
+</div>
+
+{% endblock content%}
+
+
+loggedin_content

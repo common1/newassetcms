@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block head_title %}Asset Cart Checkout || {{ block.super }}{% endblock head_title %} 
+
+{% block content %}
+
+<!-- {{ object.order_id }} -- {{ object.cart }} -->
+
+{% include "_modal.html" %}
+
+<div class="jumbotron">
+  <div class="container mt-3">
+    <div class="row">
+      <h1 class="display-6">Checkout</h1>
+  </div>
+  <hr class="my-4">
+  <div class="row">
+    {% if not billing_profile %}
+    <div class="col-12 col-md-6">
+        <p class='lead'>Login</p>
+        {% include 'accounts/snippets/form.html' with form=login_form next=request.build_absolute_uri %}
+    </div> 
+    <div class="col-12 col-md-6">
+        <p class='lead'>Continue as Guest</p>
+        {% url "guest_register" as guest_register_url %}
+        {% include 'accounts/snippets/form.html' with form=guest_form next=request.build_absolute_uri action_url=guest_register_url %}
+    </div> 
+    {% else %}
+      {% if not object.shipping_address %}
+      <div class="col-12 mb-3">
+        <p class='lead'>Shipping Address</p>
+        <hr/>
+        {% url "checkout_address_create" as checkout_address_create %}
+        {% include 'addresses/form.html' with form=address_form next=request.build_absolute_uri action_url=checkout_address_create address_type='shipping' %}
+      </div>
+      {% elif not object.billing_address %}
+      <div class="col-12 mb-3">
+        <p class='lead'>Billing Address</p>
+        <hr/>
+        {% url "checkout_address_create" as checkout_address_create %}
+        {% include 'addresses/form.html' with form=address_form next=request.build_absolute_uri action_url=checkout_address_create address_type='billing' %}
+      </div>
+      {% else %}
+      <div class="col-12 mb-3">
+        <h1>Finalize Checkout</h1>
+        <p>Cart Total: {{ object.cart.total }}</p>
+        <p>Total costs: {{ object.costs_total }}</p>
+        <p>Order total: {{ object.total }}</p>
+        <form class='form' method='POST' action="">{% csrf_token%}
+          <button type='submit'>Checkout</button>
+        </form>
+      </div>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block extrascripts %}
+
+{% endblock extrascripts %}

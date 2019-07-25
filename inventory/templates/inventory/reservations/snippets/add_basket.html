@@ -1,0 +1,8 @@
+<form method="POST" action='{% url "inventory:add_basket" %}' class="form">
+    {% csrf_token %}
+    <input type='hidden' name='reservation_id' value='{{ reservation.id }}' />
+
+    <button type='submit' class='btn btn-sm btn-primary'>
+        Add Basket
+    </button>
+</form>

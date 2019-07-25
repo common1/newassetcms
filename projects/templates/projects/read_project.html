@@ -1,0 +1,68 @@
+{% load widget_tweaks %}
+
+{% include 'common/snippets/modal_header.html' with modal_title='Project details' %}
+
+<div class="modal-body">
+  <table class="table table-borderless table-sm">
+    <tr>
+      <td>Name</td>
+      <td>
+        <strong>{{ project.name }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Manager:</td>
+      <td>
+        <strong>{{ project.manager }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Start Date</td>
+      <td>
+        <strong>{{ project.start_date }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>End Date</td>
+      <td>
+        <strong>{{ project.end_date }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Info</td>
+      <td>
+        <strong>{{ project.info }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Created by</td>
+      <td>
+        <strong>{{ project.created_by }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Created at</td>
+      <td>
+        <strong>{{ project.created_at }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Last modified by</td>
+      <td>
+        <strong>{{ project.last_modified_by }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Last modified at</td>
+      <td>
+        <strong>{{ project.last_modified_at }}</strong>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" data-dismiss="modal">
+    Close
+  </button>
+</div>

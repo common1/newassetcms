@@ -1,0 +1,134 @@
+{% load widget_tweaks %}
+
+{% include 'common/snippets/modal_header.html' with modal_title='Asset details' %}
+
+<div class="modal-body">
+  <table class="table table-borderless table-sm">
+    <tr>
+      <td>Image</td>
+      <td>
+        <strong>{{ asset.image }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td>
+        <strong>{{ asset.name }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Code:</td>
+      <td>
+        <strong>{{ asset.code }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Asset Type</td>
+      <td>
+        <strong>{{ asset.assettype }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Serial Number</td>
+      <td>
+        <strong>{{ asset.serial_number }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Order Number</td>
+      <td>
+        <strong>{{ asset.order_number }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Purchase Date</td>
+      <td>
+        <strong>{{ asset.purchase_date }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Purchase Price</td>
+      <td>
+        <strong>{{ asset.purchase_price }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Supplier</td>
+      <td>
+        <strong>{{ asset.supplier }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Owner</td>
+      <td>
+        <strong>{{ asset.owner }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Controller</td>
+      <td>
+        <strong>{{ asset.controller }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Location</td>
+      <td>
+        <strong>{{ asset.location }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Lemma</td>
+      <td>
+        <strong>{{ asset.lemma }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Featured</td>
+      <td>
+        <strong>{{ asset.featured }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Info</td>
+      <td>
+        <strong>{{ asset.info }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Active</td>
+      <td>
+        <strong>{{ asset.active }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Created by</td>
+      <td>
+        <strong>{{ asset.created_by }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Created at</td>
+      <td>
+        <strong>{{ asset.created_at }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Last modified by</td>
+      <td>
+        <strong>{{ asset.last_modified_by }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Last modified at</td>
+      <td>
+        <strong>{{ asset.last_modified_at }}</strong>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" data-dismiss="modal">
+    Close
+  </button>
+</div>

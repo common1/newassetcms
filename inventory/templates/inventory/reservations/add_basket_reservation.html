@@ -1,0 +1,77 @@
+{% extends "base.html" %} 
+
+{% block head_title %}Add Basket || {{ block.super }}{% endblock head_title %} 
+
+{% block content%} 
+
+{% include "_modal.html" %}
+
+<div class="jumbotron">
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12 mb-3">
+                <h1 class="display-6">Add Basket</h1>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-12 mb-3">
+                <h4>Reservation : {{ reservation }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mb-3">
+                <a class='btn btn-success' href='#'>Cancel</a>
+                {% if assets %}
+                <a class='btn btn-success' href='#'>Add</a>
+                {% endif %}
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-12 mb-3">
+                <table class="table table-sm">
+                {% if assets %}
+                    <thead>
+                        <tr>
+                        <th class="text-center" scope="col">#</th>
+                        <th class="text-center" scope="col">Name</th>
+                        <th class="text-center" scope="col">Code</th>
+                        <th class="text-center" scope="col">AssetType</th>
+                        <th class="text-center" scope="col">Purchase Date</th>
+                        <th class="text-center" scope="col">Purchase Price</th>
+                        <th class="text-center" scope="col">Owner</th>
+                        <th class="text-center" scope="col">Controller</th>
+                        <th class="text-center" scope="col">Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for asset in assets %}
+                        {% if asset.active %}
+                        <tr>
+                            <th class="text-center" scope="row">{{ forloop.counter }}</th>
+                            <td class="text-center">{{ asset.name }}</td>
+                            <td class="text-center">{{ asset.code }}</td>
+                            <td class="text-center">{{ asset.assettype }}</td>
+                            <td class="text-center">{{ asset.purchase_date }}</td>
+                            <td class="text-center">{{ asset.purchase_price }}</td>
+                            <td class="text-center">{{ asset.owner }}</td>
+                            <td class="text-center">{{ asset.controller }}</td>
+                            <td class="text-center">{{ asset.location }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                {% else %}
+                    <tr>
+                        <td>No assets in cart</td>
+                    </tr>
+                {% endif %}
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+          
+{% endblock content %} 

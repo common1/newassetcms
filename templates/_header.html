@@ -1,0 +1,133 @@
+{% load static %}
+
+{% url 'login' as login_url %}
+{% url 'logout' as logout_url %}
+{% url 'home:home' as home_url %}
+{% url 'home:about' as about_url %}
+{% url 'home:contact' as contact_url %}
+{% url 'home:tables' as tables_url %}
+{% url 'inventory:index_assets' as assets_url %}
+{% url 'cart:home' as cart_url %}
+
+<!-- Header -->
+<header style="border-bottom: 1px solid #eee;">
+  <!-- Messages -->
+  <div>
+    {% if messages %}
+      {% for message in messages %}
+        <div style="border-radius:0;" {% if message.tags %} class="alert alert-icon alert-{{ message.tags }} alert-dismissible fade show mb-0" role="alert" {% endif %}>
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+  <!-- End Messages -->
+  <div class="container-fluid">
+    <!-- Navbar -->
+    <!-- Important: columns can be used directly in navbar since it is d-flex -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{{ home_url }}">TUEINVCMS</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ home_url }}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          {% if not user.is_authenticated %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ assets_url }}">Assets</a>
+          </li>
+          {% endif %}
+          {% if user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Assets
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'projects:index_projects' %}">Projects</a>
+              <a class="dropdown-item" href="/assetsoverview">Overview</a>
+              <a class="dropdown-item" href="/assetsadd">Add</a>
+              <!-- <a class="dropdown-item" href="/assetsloan">Reservations</a> -->
+              <a class="dropdown-item" href="{% url 'inventory:index_reservations' %}">Reservations</a>
+              <a class="dropdown-item" href="/assetssearch">Search</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Calibration
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/calibrationreport">Report</a>
+              <a class="dropdown-item" href="/calibrationupload">Upload</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              History
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/historyassets">Assets</a>
+              <a class="dropdown-item" href="/historypeople">People</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ tables_url }}">Tables</a>
+          </li>
+          {% endif %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Help
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{ about_url }}">About</a>
+              <a class="dropdown-item" href="{{ contact_url }}">Contact</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'carts:home' %}">
+              <i class="fa fa-shopping-cart"></i>
+              {% if request.session.cart_items %}{{ request.session.cart_items }}{% else %}0{% endif%}
+            </a>
+          </li>
+        </ul>
+        {% include 'search/snippets/search_form.html' %}
+        <ul class="navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              User
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/account/profile">Profile</a>
+              <a class="dropdown-item" href="/account/profile/edit">Edit Profile</a>
+              <a class="dropdown-item" href="/account/changepassword">Change Password</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ logout_url }}">Logout</a>
+            </div>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/account/register">Register</a>
+          </li>
+          {% else %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ login_url }}">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+        
+      </div>
+    </nav>
+    
+
+    <!-- End Navbar -->
+  </div>
+</header>
+<!-- End Header -->

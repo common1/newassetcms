@@ -1,0 +1,8 @@
+<form method="POST" action='{% url "inventory:clear_reserved_assets" %}' class="form">
+    {% csrf_token %}
+    <input type='hidden' name='reservation_id' value='{{ reservation.id }}' />
+
+    <button type='submit' class='btn btn-sm btn-primary'>
+        Clear Assets
+    </button>
+</form>

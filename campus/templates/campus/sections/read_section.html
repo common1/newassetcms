@@ -1,0 +1,56 @@
+{% load widget_tweaks %}
+
+{% include 'common/snippets/modal_header.html' with modal_title='Section details' %}
+
+<div class="modal-body">
+  <table class="table table-borderless table-sm">
+    <tr>
+      <td>Code:</td>
+      <td>
+        <strong>{{ section.code }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td>
+        <strong>{{ section.name }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Faculty</td>
+      <td>
+        <strong>{{ section.faculty }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Created by</td>
+      <td>
+        <strong>{{ section.created_by }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Created at</td>
+      <td>
+        <strong>{{ section.created_at }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Last modified by</td>
+      <td>
+        <strong>{{ section.last_modified_by }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Last modified at</td>
+      <td>
+        <strong>{{ section.last_modified_at }}</strong>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" data-dismiss="modal">
+    Close
+  </button>
+</div>

@@ -1,0 +1,32 @@
+{% load widget_tweaks %}
+
+<form method="post" action="">
+  {% csrf_token %}
+
+  {% include 'common/snippets/modal_header.html' with modal_title='Delete Loaned Asset' %}
+
+  <div class="modal-body">
+    <table class="table table-borderless table-sm">
+      <tr>
+        <td class="align-middle">Code</td>
+        <td>
+          <strong>{{ loanedasset.code }}</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="align-middle">Name</td>
+        <td>
+          <strong>{{ loanedasset.name }}</strong>
+        </td>
+      </tr>
+    </table>
+
+    <p class="delete-text">
+      Are you sure you want to delete this Loaned Asset ?
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" class="delete-btn btn btn-danger">Delete</button>
+  </div>
+</form>

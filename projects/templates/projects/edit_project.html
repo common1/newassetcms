@@ -1,0 +1,121 @@
+{% extends "base.html" %} 
+
+{% load nbsp %}
+
+{% block head_title %}Edit Project || {{ block.super }}{% endblock head_title %} 
+
+{% block content %} 
+
+{% include './snippets/add_project_reservations.html' with project=project project_reservations=project_reservations none_project_reservations=none_project_reservations %}
+
+<div class="jumbotron">
+    <div class="container mt-3">
+        {% include 'common/snippets/container_header.html' with h1='Edit Project' %}
+
+        <div class="row">
+            <div class="col-12 mb-3">
+                <a class='btn btn-success' href='{% url "projects:index_projects" %}'>Back to Projects</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 mb-3">
+                <table class="table table-sm">                  
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">Name</th>
+                            <th class="text-center" scope="col">Manager</th>
+                            <th class="text-center" scope="col">Start&nbsp;Date</th>
+                            <th class="text-center" scope="col">End&nbsp;Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">{{ project.name|nbsp }}</td>
+                            <td class="text-center">{{ project.manager|nbsp }}</td>
+                            <td class="text-center">{{ project.start_date|nbsp }}</td>
+                            <td class="text-center">{{ project.end_date|nbsp }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% include 'common/snippets/container_header.html' with h3='Reservations' %}
+        <div class="row">
+            <div class="col-12 mb-3">
+                <table class="table table-sm table-borderless table-responsive">
+                    <tr>
+                        <td>
+                            <button
+                                type="button"
+                                class="btn btn-sm btn-primary"
+                                data-toggle="modal"
+                                data-target="#add_project_reservation"
+                                >
+                                Add Reservations
+                            </button>
+                        </td>
+                        {% if project_reservations %}
+                        <td>
+                            {% include './snippets/clear_project_reservations.html' with project=project %}
+                        </td>
+                        {% endif %}
+                    </tr>
+                </table>
+                {% if project_reservations %}
+                <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th class="text-center" scope="col">#</th>
+                        <th class="text-center" scope="col">Name</th>
+                        <th class="text-center" scope="col">Consumer</th>
+                        <th class="text-center" scope="col">Title</th>
+                        <th class="text-center" scope="col">Start&nbsp;Date</th>
+                        <th class="text-center" scope="col">Start&nbsp;Time</th>
+                        <th class="text-center" scope="col">End&nbsp;Date</th>
+                        <th class="text-center" scope="col">End&nbsp;Time</th>
+                        <th class="text-center" scope="col"><span class="fa fa-trash fa-lg"></span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      {% for project_reservation in project_reservations%}
+                      <tr>
+                        <th class="text-center" scope="row">{{ forloop.counter }}</th>
+                        <td class="text-center">{{ project_reservation.reservation.name|nbsp }}</td>
+                        <td class="text-center">{{ project_reservation.reservation.consumer|nbsp }}</td>
+                        <td class="text-center">{{ project_reservation.reservation.title|nbsp }}</td>
+                        <td class="text-center">{{ project_reservation.reservation.start_date|nbsp }}</td>
+                        <td class="text-center">{{ project_reservation.reservation.start_time|nbsp }}</td>
+                        <td class="text-center">{{ project_reservation.reservation.end_date|nbsp }}</td>
+                        <td class="text-center">{{ project_reservation.reservation.end_time|nbsp }}</td>
+                        <td class="text-center">
+                            {% include './snippets/delete_project_reservation.html' with project=project reservation=project_reservation %}
+                        </td>
+                    </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                {% else %}
+                <p class="no-reservations text-primary">No project reservations.</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %} 
+
+{% block extrascripts %}
+<script type="text/javascript">
+  $(function() {
+
+    // Hide message
+    $(".alert")
+      .fadeTo(2000, 500)
+      .slideUp(500, function() {
+        $(".alert").slideUp(500);
+      });
+  });
+</script>
+{% endblock extrascripts %}

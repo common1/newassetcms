@@ -1,0 +1,17 @@
+    <table class="table table-borderless table-sm">
+      {% for field in form %}
+      <tr>
+        <td class="align-middle">
+          <label for="{{ field.id_for_label }}"><strong>{{ field.label }}</strong></label>
+        </td>
+        <td>
+          {% render_field field class="form-control" placeholder=field.label %}
+          <div class="{% if field.errors %} invalid{% endif %}">
+            {% for error in field.errors %}
+            <p class="help-block">{{ error }}</p>
+            {% endfor %}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>

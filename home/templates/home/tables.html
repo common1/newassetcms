@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_title %}{{ title }} || {{ block.super }}{% endblock head_title %}
+
+{% block header%}{{ header }}{% endblock header %}
+
+{% block content%}
+
+{% url 'campus:index_buildings' as buildings_url %}
+{% url 'campus:index_faculties' as faculties_url %}
+{% url 'campus:index_locations' as locations_url %}
+{% url 'campus:index_sections' as sections_url %}
+
+{% url 'inventory:index_assets' as assets_url %}
+{% url 'inventory:index_assettypes' as assettypes_url %}
+{% url 'inventory:index_loanedassets' as loanedassets_url %}
+{% url 'inventory:index_reservations' as reservations_url %}
+{% url 'inventory:index_reservedassets' as reservedassets_url %}
+{% url 'inventory:index_returnedassets' as returnedassets_url %}
+
+{% url 'market:index_suppliers' as suppliers_url %}
+
+{% url 'nations:index_countries' as countries_url %}
+
+{% url 'siunits:index_sibaseunits' as sibaseunits_url %}
+
+<div class="jumbotron">
+    <div class="container mt-3">
+        {% include 'common/snippets/container_header.html' with h1='Tables' %}
+        <div class="row">
+            <div class="col-12 mb-3">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">#</th>
+                            <th class="text-center" scope="col">Campus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="text-center" scope="row">1</th>
+                            <td class="text-center"><a href="{{ buildings_url }}">Buildings</a></td>
+                        </tr>
+                        <tr>
+                            <th class="text-center" scope="row">2</th>
+                            <td class="text-center"><a href="{{ faculties_url }}">Faculties</a></td>
+                        </tr>
+                        <tr>
+                            <th class="text-center" scope="row">3</th>
+                            <td class="text-center"><a href="{{ locations_url }}">Locations</a></td>
+                        </tr>
+                        <tr>
+                            <th class="text-center" scope="row">4</th>
+                            <td class="text-center"><a href="{{ sections_url }}">Sections</a></td>
+                        </tr>
+                    </tbody>
+
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">#</th>
+                            <th class="text-center" scope="col">Inventory</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="text-center" scope="row">1</th>
+                            <td class="text-center"><a href="{{ assets_url }}">Assets</a></td>
+                        </tr>
+                        <tr>
+                            <th class="text-center" scope="row">2</th>
+                            <td class="text-center"><a href="{{ assettypes_url }}">Asset Types</a></td>
+                        </tr>
+                        <tr>
+                            <th class="text-center" scope="row">3</th>
+                            <td class="text-center"><a href="{{ loanedassets_url }}">Loaned Assets</a></td>
+                        </tr>
+                        <tr>
+                            <th class="text-center" scope="row">4</th>
+                            <td class="text-center"><a href="{{ reservations_url }}">Reservations</a></td>
+                        </tr>
+                        <tr>
+                            <th class="text-center" scope="row">4</th>
+                            <td class="text-center"><a href="{{ reservedassets_url }}">Reserved Assets</a></td>
+                        </tr>
+                        <tr>
+                            <th class="text-center" scope="row">4</th>
+                            <td class="text-center"><a href="{{ returnedassets_url }}">Returned Assets</a></td>
+                        </tr>
+                    </tbody>
+
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">#</th>
+                            <th class="text-center" scope="col">Market</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="text-center" scope="row">1</th>
+                            <td class="text-center"><a href="{{ suppliers_url }}">Suppliers</a></td>
+                        </tr>
+                    </tbody>
+
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">#</th>
+                            <th class="text-center" scope="col">Nations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="text-center" scope="row">1</th>
+                            <td class="text-center"><a href="{{ countries_url }}">Countries</a></td>
+                        </tr>
+                    </tbody>
+
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">#</th>
+                            <th class="text-center" scope="col">SI Units</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="text-center" scope="row">1</th>
+                            <td class="text-center"><a href="{{ sibaseunits_url }}">SI Base Units</a></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>  
+
+{% endblock content%}

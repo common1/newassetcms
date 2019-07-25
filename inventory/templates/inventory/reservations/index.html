@@ -1,0 +1,117 @@
+{% extends "base.html" %} 
+
+{% load nbsp %}
+
+{% block head_title %}Reservations || {{ block.super }}{% endblock head_title %} 
+
+{% block content %} 
+
+{% include "_modal.html" %}
+
+<div class="jumbotron">
+  <div class="container mt-3">
+    {% include 'common/snippets/container_header.html' with h1='Reservations' %}
+    <div class="row">
+      <div class="col-12 mb-3">
+        <button
+          class="create-reservation btn btn-success"
+          type="button"
+          name="button"
+        >
+          <span class="fa fa-plus mr-2"></span>Create Reservation
+        </button>
+      </div>
+      <div class="col-12 mb-3">
+        {% if reservations %}
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th class="text-center" scope="col">#</th>
+              <th class="text-center" scope="col">Name</th>
+              <th class="text-center" scope="col">Consumer</th>
+              <th class="text-center" scope="col">Title</th>
+              <th class="text-center" scope="col">Start&nbsp;Date</th>
+              <th class="text-center" scope="col">Start&nbsp;Time</th>
+              <th class="text-center" scope="col">End&nbsp;Date</th>
+              <th class="text-center" scope="col">End&nbsp;Time</th>
+              <th class="text-center" scope="col">Read&nbsp;/&nbsp;Update&nbsp;/&nbsp;Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for reservation in reservations%}
+            <tr>
+              <th class="text-center" scope="row">{{ forloop.counter }}</th>
+              <td class="text-center"><a href="{% url 'inventory:edit_reservation' reservation.pk %}">{{ reservation.name|nbsp }}</a></td>
+              <td class="text-center">{{ reservation.consumer|nbsp }}</td>
+              <td class="text-center">{{ reservation.title|nbsp }}</td>
+              <td class="text-center">{{ reservation.start_date|nbsp }}</td>
+              <td class="text-center">{{ reservation.start_time|nbsp }}</td>
+              <td class="text-center">{{ reservation.end_date|nbsp }}</td>
+              <td class="text-center">{{ reservation.end_time|nbsp }}</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="read-reservation btn btn-sm btn-primary"
+                  data-id="{% url 'inventory:read_reservation' reservation.pk %}"
+                >
+                  <span class="fa fa-eye"></span>
+                </button>
+                <button
+                  type="button"
+                  class="update-reservation btn btn-sm btn-primary"
+                  data-id="{% url 'inventory:update_reservation' reservation.pk %}"
+                >
+                  <span class="fa fa-pencil"></span>
+                </button>
+                <button
+                  type="button"
+                  class="delete-reservation btn btn-sm btn-danger"
+                  data-id="{% url 'inventory:delete_reservation' reservation.pk %}"
+                >
+                  <span class="fa fa-trash"></span>
+                </button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p class="no-reservations text-primary">No reservations added yet.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %} 
+
+{% block extrascripts %}
+<script type="text/javascript">
+  $(function() {
+    // Create reservation button
+    $(".create-reservation").modalForm({ formURL: "{% url 'inventory:create_reservation' %}" });
+
+    // Update reservation buttons
+    $(".update-reservation").each(function() {
+      $(this).modalForm({ formURL: $(this).data("id") });
+    });
+
+    // Read reservation buttons
+    $(".read-reservation").each(function() {
+      $(this).modalForm({ formURL: $(this).data("id") });
+    });
+
+    // Delete reservation buttons
+    $(".delete-reservation").each(function() {
+      $(this).modalForm({ formURL: $(this).data("id") });
+    });
+
+    // Hide message
+    $(".alert")
+      .fadeTo(2000, 500)
+      .slideUp(500, function() {
+        $(".alert").slideUp(500);
+      });
+  });
+</script>
+{% endblock extrascripts %}

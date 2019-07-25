@@ -1,0 +1,105 @@
+{% load widget_tweaks %}
+
+{% include 'common/snippets/modal_header.html' with modal_title='Supplier details' %}
+
+<div class="modal-body">
+  <table class="table table-borderless table-sm">
+    <tr>
+      <td>Name:</td>
+      <td>
+        <strong>{{ supplier.name }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Address</td>
+      <td>
+        <strong>{{ supplier.address }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Postal Code</td>
+      <td>
+        <strong>{{ supplier.postal_code }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Town</td>
+      <td>
+        <strong>{{ supplier.town }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Country</td>
+      <td>
+        <strong>{{ supplier.country }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Phone Number</td>
+      <td>
+        <strong>{{ supplier.phone_number }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Fax Number</td>
+      <td>
+        <strong>{{ supplier.fax_number }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>E-mail</td>
+      <td>
+        <strong>{{ supplier.email }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>URL</td>
+      <td>
+        <strong>{{ supplier.url }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Info</td>
+      <td>
+        <strong>{{ supplier.info }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Active</td>
+      <td>
+        <strong>{{ supplier.active }}</strong>
+      </td>
+    </tr>
+
+    <tr class="table-dark">
+      <td>Created by</td>
+      <td>
+        <strong>{{ supplier.created_by }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Created at</td>
+      <td>
+        <strong>{{ supplier.created_at }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Last modified by</td>
+      <td>
+        <strong>{{ supplier.last_modified_by }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Last modified at</td>
+      <td>
+        <strong>{{ supplier.last_modified_at }}</strong>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" data-dismiss="modal">
+    Close
+  </button>
+</div>

@@ -1,0 +1,81 @@
+{% load widget_tweaks %}
+
+{% include 'common/snippets/modal_header.html' with modal_title='Loaned Asset details' %}
+
+<div class="modal-body">
+  <table class="table table-borderless table-sm">
+    <tr>
+      <td>Reserved Asset:</td>
+      <td>
+        <strong>{{ loanedasset.reservedasset }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Supplier Out</td>
+      <td>
+        <strong>{{ loanedasset.supplier_out }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Receiver Out</td>
+      <td>
+        <strong>{{ loanedasset.receiver_out }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Pickup Date</td>
+      <td>
+        <strong>{{ loanedasset.pickup_date }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Pickup Time</td>
+      <td>
+        <strong>{{ loanedasset.pickup_time }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Info</td>
+      <td>
+        <strong>{{ loanedasset.info }}</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>Active</td>
+      <td>
+        <strong>{{ loanedasset.active }}</strong>
+      </td>
+    </tr>
+
+    <tr class="table-dark">
+      <td>Created by</td>
+      <td>
+        <strong>{{ loanedasset.created_by }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Created at</td>
+      <td>
+        <strong>{{ loanedasset.created_at }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Last modified by</td>
+      <td>
+        <strong>{{ loanedasset.last_modified_by }}</strong>
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <td>Last modified at</td>
+      <td>
+        <strong>{{ loanedasset.last_modified_at }}</strong>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" data-dismiss="modal">
+    Close
+  </button>
+</div>

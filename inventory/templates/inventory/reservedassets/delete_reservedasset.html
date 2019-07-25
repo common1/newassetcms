@@ -1,0 +1,38 @@
+{% load widget_tweaks %}
+
+<form method="post" action="">
+  {% csrf_token %}
+
+  {% include 'common/snippets/modal_header.html' with modal_title='Delete Reserved Asset' %}
+
+  <div class="modal-body">
+    <table class="table table-borderless table-sm">
+      <tr>
+        <td class="align-middle">Reservation</td>
+        <td>
+          <strong>{{ reservedasset.reservation }}</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="align-middle">Asset</td>
+        <td>
+          <strong>{{ reservedasset.asset }}</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="align-middle">Name</td>
+        <td>
+          <strong>{{ reservedasset.name }}</strong>
+        </td>
+      </tr>
+    </table>
+
+    <p class="delete-text">
+      Are you sure you want to delete this ReservedAsset ?
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" class="delete-btn btn btn-danger">Delete</button>
+  </div>
+</form>

@@ -1,0 +1,113 @@
+{% extends "base.html" %} 
+
+{% block head_title %}Edit Reservation || {{ block.super }}{% endblock head_title %} 
+
+{% block content %} 
+
+{% include "_modal.html" %}
+
+<div class="jumbotron">
+    <div class="container mt-3">
+        {% include 'common/snippets/container_header.html' with h1='Edit Reservation' %}
+
+        <div class="row">
+            <div class="col-12 mb-3">
+                <a class='btn btn-success' href='{% url "inventory:index_reservations" %}'>Back to Reservations</a>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12 mb-3">
+                <table class="table table-sm">                  
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">Name</th>
+                            <th class="text-center" scope="col">Consumer</th>
+                            <th class="text-center" scope="col">Title</th>
+                            <th class="text-center" scope="col">Start Date</th>
+                            <th class="text-center" scope="col">Start Time</th>
+                            <th class="text-center" scope="col">End Date</th>
+                            <th class="text-center" scope="col">End Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">{{ reservation.name }}</td>
+                            <td class="text-center">{{ reservation.consumer }}</td>
+                            <td class="text-center">{{ reservation.title }}</td>
+                            <td class="text-center">{{ reservation.start_date }}</td>
+                            <td class="text-center">{{ reservation.start_time }}</td>
+                            <td class="text-center">{{ reservation.end_date }}</td>
+                            <td class="text-center">{{ reservation.end_time }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% include 'common/snippets/container_header.html' with h3='Reserved Assets' %}
+        <div class="row">
+            <div class="col-12 mb-3">           
+                <table class="table table-sm table-borderless table-responsive">
+                    <tr>
+                        <td>
+                            {% include './snippets/add_basket.html' with reservation=reservation %}
+                        </td>
+                        {% if reservedassets %}
+                        <td>
+                            {% include './snippets/clear_reserved_assets.html' with reservation=reservation %}
+                        </td>
+                        {% endif %}
+                    </tr>
+                </table>
+
+                {% if reservedassets %}
+                <table class="table table-sm">                  
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">#</th>
+                            <th class="text-center" scope="col">Asset Name</th>
+                            <th class="text-center" scope="col">Reserved Asset Name</th>
+                            <th class="text-center" scope="col">Active</th>
+                            <th class="text-center" scope="col"><span class="fa fa-trash fa-lg"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reservedasset in reservedassets %}
+                        <tr>
+                            <th class="text-center" scope="row">{{ forloop.counter }}</th>
+                            <td class="text-center">{{ reservedasset.asset.name }}</td>
+                            <td class="text-center">{{ reservedasset.name }}</td>
+                            <td class="text-center">{{ reservedasset.active }}</td>
+                            <td class="text-center">
+                                {% include './snippets/delete_reserved_asset.html' with reservation=reservation reservedasset=reservedasset %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class='lead'>No reserved assets</p>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %} 
+
+{% block extrascripts %}
+<script type="text/javascript">
+  $(function() {
+
+    // Hide message
+    $(".alert")
+      .fadeTo(2000, 500)
+      .slideUp(500, function() {
+        $(".alert").slideUp(500);
+      });
+  });
+</script>
+{% endblock extrascripts %}

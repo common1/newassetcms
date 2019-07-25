@@ -1,0 +1,120 @@
+{% extends "base.html" %} 
+
+{% block head_title %}Assets || {{ block.super }}{% endblock head_title %} 
+
+{% block content%} 
+
+{% include "_modal.html" %}
+
+<div class="jumbotron">
+  <div class="container">
+    <!-- <div class="row">
+      <div class="col-12 mb-3">
+        <h1 class="display-6">Search Assets</h1>
+      </div>
+    </div> -->
+    <div class="row mb-3">
+      {% if query %}
+      <div class="col-12">
+        <h5 class="display-6">Results for : <b>{{ query }}</b></h5>
+      </div>
+      {% else %}
+      <div class='col-12 col-md-8 mx-auto mb-5'>
+        {% include 'search/snippets/search_form.html' %}
+      </div>
+      {% endif %}
+    </div>
+    <hr class="my-4">
+    <div class="row">
+      <!-- <div class="col-12 mb-3">
+        <button
+          class="create-asset btn btn-primary"
+          type="button"
+          name="button"
+        >
+          <span class="fa fa-plus mr-2"></span>Create Asset
+        </button>
+      </div> -->
+      <div class="col-12 mb-3">
+        {% if assets %}
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th class="text-center" scope="col">#</th>
+              <th class="text-center" scope="col">Name</th>
+              <th class="text-center" scope="col">Code</th>
+              <th class="text-center" scope="col">AssetType</th>
+              <!-- <th class="text-center" scope="col">Read / Update</th> -->
+              <th class="text-center" scope="col"><span class="fa fa-shopping-basket fa-lg"></span></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for asset in assets%}
+            {% if asset.active %}
+            <tr>
+              <th class="text-center" scope="row">{{ forloop.counter }}</th>
+              <td class="text-center">{{ asset.name }}</td>
+              <td class="text-center">{{ asset.code }}</td>
+              <td class="text-center">{{ asset.assettype }}</td>
+              <!-- <td class="text-center">
+                <button
+                  type="button"
+                  class="read-asset btn btn-sm btn-primary"
+                  data-id="{% url 'inventory:read_asset' asset.pk %}"
+                >
+                  <span class="fa fa-eye"></span>
+                </button>
+                <button
+                  type="button"
+                  class="update-asset btn btn-sm btn-primary"
+                  data-id="{% url 'inventory:update_asset' asset.pk %}"
+                >
+                  <span class="fa fa-pencil"></span>
+                </button>
+              </td> -->
+              <td class="text-center">
+                {% include 'inventory/assets/snippets/update_cart.html' with asset=asset cart=cart current='search' query=query%}
+              </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p class="no-assets text-primary">No assets found.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %} {% block extrascripts %}
+<script type="text/javascript">
+  $(function() {
+    // Create asset button
+    $(".create-asset").modalForm({ formURL: "{% url 'inventory:create_asset' %}" });
+
+    // Update asset buttons
+    $(".update-asset").each(function() {
+      $(this).modalForm({ formURL: $(this).data("id") });
+    });
+
+    // Read asset buttons
+    $(".read-asset").each(function() {
+      $(this).modalForm({ formURL: $(this).data("id") });
+    });
+
+    // Delete asset buttons
+    $(".delete-asset").each(function() {
+      $(this).modalForm({ formURL: $(this).data("id") });
+    });
+
+    // Hide message
+    $(".alert")
+      .fadeTo(2000, 500)
+      .slideUp(500, function() {
+        $(".alert").slideUp(500);
+      });
+  });
+</script>
+{% endblock extrascripts %}

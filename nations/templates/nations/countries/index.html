@@ -1,0 +1,103 @@
+{% extends "base.html" %} 
+
+{% block head_title %}Countries || {{ block.super }}{% endblock head_title %} 
+
+{% block content%} 
+
+{% include "_modal.html" %}
+
+<div class="jumbotron">
+  <div class="container mt-3">
+    {% include 'common/snippets/container_header.html' with h1='Countries' %}
+    <div class="row">
+      <div class="col-12 mb-3">
+        <button
+          class="create-country btn btn-success"
+          type="button"
+          name="button"
+        >
+          <span class="fa fa-plus mr-2"></span>Create Country
+        </button>
+      </div>
+      <div class="col-12 mb-3">
+        {% if countries %}
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th class="text-center" scope="col">#</th>
+              <th class="text-center" scope="col">Code</th>
+              <th class="text-center" scope="col">Name</th>
+              <th class="text-center" scope="col">Read / Update / Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for country in countries%}
+            <tr>
+              <th class="text-center" scope="row">{{ forloop.counter }}</th>
+              <td class="text-center">{{ country.code }}</td>
+              <td class="text-center">{{ country.name }}</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="read-country btn btn-sm btn-primary"
+                  data-id="{% url 'nations:read_country' country.pk %}"
+                >
+                  <span class="fa fa-eye"></span>
+                </button>
+                <button
+                  type="button"
+                  class="update-country btn btn-sm btn-primary"
+                  data-id="{% url 'nations:update_country' country.pk %}"
+                >
+                  <span class="fa fa-pencil"></span>
+                </button>
+                <button
+                  type="button"
+                  class="delete-country btn btn-sm btn-danger"
+                  data-id="{% url 'nations:delete_country' country.pk %}"
+                >
+                  <span class="fa fa-trash"></span>
+                </button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p class="no-countries text-primary">No countries added yet.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %} {% block extrascripts %}
+<script type="text/javascript">
+  $(function() {
+    // Create country button
+    $(".create-country").modalForm({ formURL: "{% url 'nations:create_country' %}" });
+
+    // Update country buttons
+    $(".update-country").each(function() {
+      $(this).modalForm({ formURL: $(this).data("id") });
+    });
+
+    // Read country buttons
+    $(".read-country").each(function() {
+      $(this).modalForm({ formURL: $(this).data("id") });
+    });
+
+    // Delete country buttons
+    $(".delete-country").each(function() {
+      $(this).modalForm({ formURL: $(this).data("id") });
+    });
+
+    // Hide message
+    $(".alert")
+      .fadeTo(2000, 500)
+      .slideUp(500, function() {
+        $(".alert").slideUp(500);
+      });
+  });
+</script>
+{% endblock extrascripts %}

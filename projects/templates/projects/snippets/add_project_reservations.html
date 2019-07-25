@@ -1,0 +1,105 @@
+{% load nbsp %}
+
+<script type="text/javascript">
+function checkAll() {
+  var check_item = document.getElementById('checkall');
+  var items=document.getElementsByName('check');
+   
+  for(var i=0; i<items.length; i++) {
+    if (check_item.checked==true)
+      document.getElementById(items[i].id).checked = true;
+    else
+      document.getElementById(items[i].id).checked = false;
+  }
+}
+
+function uncheckAll(){
+  var items=document.getElementsByName('check');
+
+  document.getElementById('checkall').checked = false;
+  for(var i=0; i<items.length; i++) {
+    document.getElementById(items[i].id).checked = false;
+  }
+
+}
+
+function checkedItems(){
+  var items=document.getElementsByName('check');
+
+  sci = document.getElementById('checked_items')
+
+  for(var i=0; i<items.length; i++) {
+    if (document.getElementById(items[i].id).checked == true)
+    sci.value = sci.value + items[i].id + ';'
+  }
+  sci.value = sci.value.substring(0, sci.value.length - 1);
+}
+</script>
+
+<div class="modal fade" id="add_project_reservation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Add Reservations</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <!--Body-->
+      <div class="modal-body">
+
+          <!-- project, reservations, project_reservations -->
+
+          <table class="table table-hover table-sm">
+              <thead>
+                <tr>
+                  <th class="text-center" scope="col">#</th>
+                  <th class="text-center" scope="col">Name</th>
+                  <th class="text-center" scope="col">Start&nbsp;Date</th>
+                  <th class="text-center" scope="col">Start&nbsp;Time</th>
+                  <th class="text-center" scope="col">End&nbsp;Date</th>
+                  <th class="text-center" scope="col">End&nbsp;Time</th>
+                  <th class="text-center" scope="col">
+                    <input type="checkbox" id="checkall" onclick="checkAll()"> 
+                  </th>
+              </tr>
+              </thead>
+              <tbody>
+                {% for none_project_reservation in none_project_reservations %}
+                <tr>
+                  <th class="text-center" scope="row">{{ forloop.counter }}</th>
+                  <td class="text-center">{{ none_project_reservation.name|nbsp }}</td>
+                  <td class="text-center">{{ none_project_reservation.start_date|nbsp }}</td>
+                  <td class="text-center">{{ none_project_reservation.start_time|nbsp }}</td>
+                  <td class="text-center">{{ none_project_reservation.end_date|nbsp }}</td>
+                  <td class="text-center">{{ none_project_reservation.end_time|nbsp }}</td>
+                  <td class="text-center">
+                    <input type="checkbox" name="check" id="{{ none_project_reservation.id }}">
+                  </td>
+              </tr>
+                {% endfor %}
+              </tbody>
+          </table>
+
+      </div>
+      <!--Footer-->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary" onclick="uncheckAll()" data-dismiss="modal">Cancel</button>
+        <form method="POST" action='{% url "projects:add_reservations" %}' class="form" >
+            {% csrf_token %}
+            <!-- TODO: Uncheck all items when ESC or clicking ourside modal windows -->
+            <input type='hidden' name='project_id' value='{{ project.id }}' />
+            <input type='hidden' name='checked_items' id='checked_items' />
+            
+            <button type='submit' class='btn btn-sm btn-primary' onclick="checkedItems()">
+                Ok
+            </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

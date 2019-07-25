@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{% block head_title %}TUEINVCMS{% endblock head_title %}</title>
+	{% include 'snippets/css.html' %}
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+<body>
+	{% include './snippets/nav.html' %}
+
+	<div class='container'>
+		<hr>
+		<h1>
+			{% block header %}No header{% endblock header %}
+		</h1>
+		<hr>
+	</div>
+	<div class='container'>
+		{% block content %}{% endblock content %}
+	</div>
+	{% include 'snippets/js.html' %}
+</body>
+</html>

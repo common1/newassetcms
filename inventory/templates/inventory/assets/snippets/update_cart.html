@@ -1,0 +1,18 @@
+<form method="POST" action='{% url "carts:update" %}' class="form">
+    {% csrf_token %}
+    <input type='hidden' name='asset_id' value='{{ asset.id }}' />
+    <input type='hidden' name='current' value='{{ current }}' />
+    {% if query %}
+    <input type='hidden' name='query' value='{{ query }}' />
+    {% endif %}
+
+    {% if asset in cart.assets.all %}
+        <button type='submit' class='btn btn-sm btn-danger'>
+            <span class="fa fa-minus"></span>
+        </button>
+    {% else %}
+        <button type='submit' class='btn btn-sm btn-primary'>
+            <span class="fa fa-plus"></span>
+        </button>
+    {% endif %}
+</form>

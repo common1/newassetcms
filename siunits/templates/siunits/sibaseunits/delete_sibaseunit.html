@@ -1,0 +1,50 @@
+{% load widget_tweaks %}
+
+<form method="post" action="">
+  {% csrf_token %}
+
+  {% include 'common/snippets/modal_header.html' with modal_title='Delete SI Base Unit' %}
+
+  <div class="modal-body">
+    <table class="table table-borderless table-sm">
+      <tr>
+        <td class="align-middle">Name</td>
+        <td>
+          <strong>{{ sibaseunit.name }}</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="align-middle">Symbol</td>
+        <td>
+          <strong>{{ sibaseunit.symbol }}</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="align-middle">Value</td>
+        <td>
+          <strong>{{ sibaseunit.value }}</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="align-middle">Weight</td>
+        <td>
+          <strong>{{ sibaseunit.weight }}</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="align-middle">Parent</td>
+        <td>
+          <strong>{{ sibaseunit.parent }}</strong>
+        </td>
+      </tr>
+    </table>
+
+    <p class="delete-text">
+      Are you sure you want to delete this SI Base Unit ?
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" class="delete-btn btn btn-danger">Delete</button>
+  </div>
+</form>

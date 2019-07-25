@@ -1,0 +1,7 @@
+<form method="POST" action='{% url "carts:clear" %}' class="form">
+        {% csrf_token %}
+        <button type='submit' class='btn btn-sm btn-primary'>
+            Clear Cart
+        </button>
+    </form>
+    

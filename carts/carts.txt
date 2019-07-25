@@ -1,0 +1,19 @@
+See also:
+
+
+
+065 Cart Model Manager Part 1
+https://www.youtube.com/watch?v=-H10iu0hm_E&list=PLj-jdGgxSLAkO-5EweQDdkyoF9wpI6vbj&index=68
+
+064 Create a Cart in the View
+https://www.youtube.com/watch?v=AjHVO1CBdVY&list=PLj-jdGgxSLAkO-5EweQDdkyoF9wpI6vbj&index=64
+
+063 Cart Model
+https://www.youtube.com/watch?v=_K4Wc2P27-Q&list=PLj-jdGgxSLAkO-5EweQDdkyoF9wpI6vbj&index=63
+
+062 Django Sessions
+https://www.youtube.com/watch?v=LNE3l6FmE1U&list=PLj-jdGgxSLAkO-5EweQDdkyoF9wpI6vbj&index=62
+
+061 Cart App
+https://www.youtube.com/watch?v=Hervxo5YiwQ&list=PLj-jdGgxSLAkO-5EweQDdkyoF9wpI6vbj&index=61
+

@@ -37,7 +37,34 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_userforeignkey',
+    'import_export',
+    'bootstrap_modal_forms',
+    'crispy_forms',
+    'widget_tweaks',
+    'custommodal',
+    'base',
+    'common',
+    'mytags',
+    'search',
+    'tests',
+    'home',
+    'samples',
+    'nations',
+    'siunits',
+    'campus',
+    'market',
+    'inventory',
+    'tags',
+    'carts',
+    'orders',
+    'accounts',
+    'billing',
+    'addresses',
+    'projects',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -47,6 +74,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_userforeignkey.middleware.UserForeignKeyMiddleware',
+    'django_currentuser.middleware.ThreadLocalUserMiddleware',
+    'django_currentuser.middleware.ThreadLocalUserMiddleware',
 ]
 
 ROOT_URLCONF = 'setup.urls'
@@ -54,7 +85,7 @@ ROOT_URLCONF = 'setup.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -62,6 +93,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -105,7 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Amsterdam'
 
 USE_I18N = True
 
@@ -117,4 +149,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+STATICFILES_FINDERS = [
+    # searches in STATICFILES_DIRS
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    # searches in STATIC subfolder of each app
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+LOGIN_REDIRECT_URL = "/"
+
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static_myproj"),
+]
+
+STATIC_ROOT = os.path.join(os.path.dirname(
+    BASE_DIR), "static_cdn", "static_root")
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(os.path.dirname(
+    BASE_DIR), "static_cdn", "media_root")
+
+CART_SESSION_ID = 'mycart'

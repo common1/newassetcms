@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block head_title %}Asset Cart Checkout || {{ block.super }}{% endblock head_title %} 
+
+{% block content %}
+
+<!-- {{ object.order_id }} -- {{ object.cart }} -->
+
+{% include "_modal.html" %}
+
+<div class="jumbotron">
+  <div class="container mt-3">
+    <div class="row">
+      <h1 class="display-6">Reserve</h1>
+  </div>
+  <hr class="my-4">
+
+</div>
+
+{% endblock content %}
+
+{% block extrascripts %}
+
+{% endblock extrascripts %}

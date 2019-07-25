@@ -1,0 +1,109 @@
+{% extends "base.html" %} 
+
+{% block head_title %}Returned Assets || {{ block.super }}{% endblock head_title %} 
+
+{% block content%} 
+
+{% include "_modal.html" %}
+
+<div class="jumbotron">
+  <div class="container mt-3">
+    {% include 'common/snippets/container_header.html' with h1='Returned Assets' %}
+    <div class="row">
+      <div class="col-12 mb-3">
+        <button
+          class="create-returnedasset btn btn-success"
+          type="button"
+          name="button"
+        >
+          <span class="fa fa-plus mr-2"></span>Create Returned Asset
+        </button>
+      </div>
+      <div class="col-12 mb-3">
+        {% if returnedassets %}
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th class="text-center" scope="col">#</th>
+              <th class="text-center" scope="col">Loaned Asset</th>
+              <th class="text-center" scope="col">Supplier In</th>
+              <th class="text-center" scope="col">Receiver In</th>
+              <th class="text-center" scope="col">Deliver Date</th>
+              <th class="text-center" scope="col">Deliver Time</th>
+              <th class="text-center" scope="col">Read / Update / Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for returnedasset in returnedassets%}
+            <tr>
+              <th class="text-center" scope="row">{{ forloop.counter }}</th>
+              <td class="text-center">{{ returnedasset.loanedasset }}</td>
+              <td class="text-center">{{ returnedasset.supplier_in }}</td>
+              <td class="text-center">{{ returnedasset.receiver_in }}</td>
+              <td class="text-center">{{ returnedasset.deliver_date }}</td>
+              <td class="text-center">{{ returnedasset.deliver_time }}</td>
+              <td class="text-center">
+                <button
+                  type="button"
+                  class="read-returnedasset btn btn-sm btn-primary"
+                  data-id="{% url 'inventory:read_returnedasset' returnedasset.pk %}"
+                >
+                  <span class="fa fa-eye"></span>
+                </button>
+                <button
+                  type="button"
+                  class="update-returnedasset btn btn-sm btn-primary"
+                  data-id="{% url 'inventory:update_returnedasset' returnedasset.pk %}"
+                >
+                  <span class="fa fa-pencil"></span>
+                </button>
+                <button
+                  type="button"
+                  class="delete-returnedasset btn btn-sm btn-danger"
+                  data-id="{% url 'inventory:delete_returnedasset' returnedasset.pk %}"
+                >
+                  <span class="fa fa-trash"></span>
+                </button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p class="no-returnedassets text-primary">No Returned Assets added yet.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %} {% block extrascripts %}
+<script type="text/javascript">
+  $(function() {
+    // Create returnedasset button
+    $(".create-returnedasset").modalForm({ formURL: "{% url 'inventory:create_returnedasset' %}" });
+
+    // Update returnedasset buttons
+    $(".update-returnedasset").each(function() {
+      $(this).modalForm({ formURL: $(this).data("id") });
+    });
+
+    // Read returnedasset buttons
+    $(".read-returnedasset").each(function() {
+      $(this).modalForm({ formURL: $(this).data("id") });
+    });
+
+    // Delete returnedasset buttons
+    $(".delete-returnedasset").each(function() {
+      $(this).modalForm({ formURL: $(this).data("id") });
+    });
+
+    // Hide message
+    $(".alert")
+      .fadeTo(2000, 500)
+      .slideUp(500, function() {
+        $(".alert").slideUp(500);
+      });
+  });
+</script>
+{% endblock extrascripts %}

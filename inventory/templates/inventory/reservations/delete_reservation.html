@@ -1,0 +1,62 @@
+{% load widget_tweaks %}
+
+<form method="post" action="">
+  {% csrf_token %}
+
+  {% include 'common/snippets/modal_header.html' with modal_title='Delete Reservation' %}
+
+  <div class="modal-body">
+    <table class="table table-borderless table-sm">
+      <tr>
+        <td class="align-middle">Name</td>
+        <td>
+          <strong>{{ reservation.name }}</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="align-middle">Consumer</td>
+        <td>
+          <strong>{{ reservation.consumer }}</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="align-middle">Title</td>
+        <td>
+          <strong>{{ reservation.title }}</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="align-middle">Start Date</td>
+        <td>
+          <strong>{{ reservation.start_date }}</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="align-middle">Start Time</td>
+        <td>
+          <strong>{{ reservation.start_time }}</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="align-middle">End Date</td>
+        <td>
+          <strong>{{ reservation.end_date }}</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="align-middle">End Time</td>
+        <td>
+          <strong>{{ reservation.end_time }}</strong>
+        </td>
+      </tr>
+    </table>
+
+    <p class="delete-text">
+      Are you sure you want to delete this Reservation ?
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" class="delete-btn btn btn-danger">Delete</button>
+  </div>
+</form>
